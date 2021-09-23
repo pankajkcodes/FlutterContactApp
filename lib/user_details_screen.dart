@@ -1,4 +1,3 @@
-import 'package:contactapp/user_edtails.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -7,10 +6,10 @@ class AboutScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as UserDetails;
-    final name = args.name;
-    final phone = args.phone;
-    final age = args.age;
+    final args = ModalRoute.of(context)!.settings.arguments as Map;
+    final name = args['name'];
+    final phone = args['phone'];
+    final age = args['id'];
     return Scaffold(
       appBar: AppBar(
         title: Text(name),

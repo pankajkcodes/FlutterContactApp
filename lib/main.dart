@@ -11,12 +11,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.amber,
-        textTheme: const TextTheme(bodyText2: TextStyle(fontSize: 30)),
+        primarySwatch: Colors.green,
+        textTheme: const TextTheme(bodyText2: TextStyle(fontSize: 25)),
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => HomeScreen(),
+        '/': (context) => const HomeScreen(),
         '/about': (context) => const AboutScreen(),
       },
     );

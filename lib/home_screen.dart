@@ -1,16 +1,39 @@
-import 'package:contactapp/user_edtails.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
-class HomeScreen extends StatelessWidget {
-  final List<UserDetails> users = [
-    UserDetails(name: 'Ramesh Verma', phone: 22233444, age: 17),
-    UserDetails(name: 'suresh verma', phone: 34333444, age: 19),
-    UserDetails(name: 'suresh verma', phone: 34333444, age: 19),
-    UserDetails(name: 'suresh verma', phone: 34333444, age: 19),
-    UserDetails(name: 'suresh verma', phone: 34333444, age: 19),
-  ];
+class HomeScreen extends StatefulWidget {
+ 
 
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+ var users = [];
+
+  @override
+  void initState(){
+
+    getuserData();
+    super.initState();
+  }
+
+
+  Future<void> getuserData() async {
+              try {
+                http.Response resp = await http.get(
+                Uri.parse('https://jsonplaceholder.typicode.com/users'));
+                setState(() {
+                  users = jsonDecode(resp.body);
+                });
+              } catch (err) {
+                print(err.toString());
+              }
+      }
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +50,9 @@ class HomeScreen extends StatelessWidget {
                       arguments: users[index]);
                 },
                 leading: const Icon(Icons.person),
-                title: Text(users[index].name),
+                title: Text(users[index]['name']),
               ),
-              elevation: 3,
+              elevation: 2,
             );
           },
           itemCount: users.length,
